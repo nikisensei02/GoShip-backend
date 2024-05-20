@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: server
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: nodemon index.js
+    envVars:
+      - key: MONGO_URL
+        value: "mongodb+srv://nikshepch2001:42apQyBGgrq9FarK@cluster0.4xedcno.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+      - key: ORIGIN
+        value: 'http://localhost:3000'
