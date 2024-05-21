@@ -7,10 +7,22 @@ const socket = require("socket.io");
 require("dotenv").config();
 
 const app = express();
-const ORIGIN = 'https://664c255b9e6c50823bb16adf--kaleidoscopic-swan-570a57.netlify.app/'
+const ALLOWED_ORIGINS = [
+  'https://664c255b9e6c50823bb16adf--kaleidoscopic-swan-570a57.netlify.app',
+  'https://664bae0211b52523766c1048--sparkling-belekoy-c71609.netlify.app' // add other origins if needed
+];
 
 // Middleware setup
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || ALLOWED_ORIGINS.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Database connection
@@ -43,7 +55,7 @@ const server = app.listen(process.env.PORT || 3000, () =>
 // Socket.IO setup
 const io = socket(server, {
   cors: {
-    origin: ORIGIN, // Update this with your client URL
+    origin: ALLOWED_ORIGINS, // Update this with your client URLs
     credentials: true,
   },
 });
