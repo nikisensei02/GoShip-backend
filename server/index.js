@@ -7,7 +7,7 @@ const socket = require("socket.io");
 require("dotenv").config();
 
 const app = express();
-const ORIGIN = 'https://664bae0211b52523766c1048--sparkling-belekoy-c71609.netlify.app'
+const ORIGIN = 'https://664c255b9e6c50823bb16adf--kaleidoscopic-swan-570a57.netlify.app/'
 
 // Middleware setup
 app.use(cors());
